@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+class{
+    background-color:  from-zinc-300 to bg-indigo-400,
+    
+}
