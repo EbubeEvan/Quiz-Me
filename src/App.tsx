@@ -1,4 +1,3 @@
-import History from "./pages/History"
 import Home from "./pages/Home"
 import SelectCategories from "./pages/SelectCategories"
 import QuizPage from "./pages/QuizPage"

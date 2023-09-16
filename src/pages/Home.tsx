@@ -1,4 +1,4 @@
-
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -9,9 +9,11 @@ const Home = () => {
       </h1>
       <div className=" h-[100vh] flex justify-center items-center md:h-[100vh] ">
         <div className="flex flex-col gap-6 md:flex-row md:gap-[10rem]">
-          <button className=" bg-red-600 text-white py-4 px-10 rounded-md h-fit">
-            Begin
-          </button>
+          <Link to={'selectcategories'}>
+            <button className=" bg-red-600 text-white py-4 px-10 rounded-md h-fit">
+              Begin
+            </button>
+          </Link>
           <button className=" bg-red-600 text-white py-4 px-8 rounded-md h-fit">
             Resume
           </button>
