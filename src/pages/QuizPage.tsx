@@ -5,10 +5,12 @@ import { useNavigate } from "react-router-dom";
 const QuizPage = () => {
   const [questionNum, setQuestionNum] = useState(0);
   const [submitted, setSubmitted] = useState(false);
-  const [selected, setselected] = useState(false);
-  const [isCorrect, setIsCorrect] = useState(false);
+  const [correctAnserIndex, setCorrectAnserIndex] = useState(-1);
+  // const [correctAnswer, setCorrectAnswer] = useState()
   const [buttonValue, setButtonValue] = useState("");
-  const [finalOptions, setFinalOptions] = useState([])
+  const [selectedButtonIndex, setSelectedButtonIndex] = useState(-1);
+  const [finalOptions, setFinalOptions] = useState<string[]>([]);
+  const [selected, setselected] = useState(false)
 
   const navigate = useNavigate();
 
@@ -18,12 +20,12 @@ const QuizPage = () => {
   const question = questionList[questionNum].question;
 
   // Fisher-Yates shuffle algorithm
-  const shuffleOptions = (arr : []) => {
+  const shuffleOptions = (arr: []) => {
     let n = arr.length;
     for (let i = n - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-  // use array destructuring without tempoaray variable
-    [arr[i], arr[j]] = [arr[j], arr[i]];
+      const j = Math.floor(Math.random() * (i + 1));
+      // use array destructuring without tempoaray variable
+      [arr[i], arr[j]] = [arr[j], arr[i]];
     }
     return arr;
   };
@@ -33,40 +35,47 @@ const QuizPage = () => {
       ...questionList[questionNum]?.incorrect_answers,
       questionList[questionNum]?.correct_answer,
     ];
-    setFinalOptions(shuffleOptions(initOptions))
-  }, [questionNum])
+    setFinalOptions(shuffleOptions(initOptions));
+    // setCorrectAnswer(questionList[questionNum]?.incorrect_answers)
+  }, [questionNum]);
 
   const next = () => {
-    setIsCorrect(false);
-    setselected(false)
-    setSubmitted(false)
+    setCorrectAnserIndex(-1);
+    setSubmitted(false);
+    setSelectedButtonIndex(-1);
     questionNum === questionList.length - 1
       ? navigate("/score")
       : setQuestionNum(questionNum + 1);
   };
 
   const previous = () => {
-    setIsCorrect(false);
-    setselected(false)
-    setSubmitted(false)
+    setCorrectAnserIndex(-1);
+    setSubmitted(false);
+    setSelectedButtonIndex(-1);
     questionNum === 0
       ? setQuestionNum(questionNum)
       : setQuestionNum(questionNum - 1);
   };
 
-  const handleSelect = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setselected(true)
+  const handleSelect = (
+    event: React.MouseEvent<HTMLButtonElement>,
+    index: number
+  ) => {
     setButtonValue(event.currentTarget.value);
+    setSelectedButtonIndex(index);
+    setselected(true)
   };
 
   const submit = () => {
     setSubmitted(true);
+    const correctIndex = questionList[questionNum].correct_answer;
+    const correctIndexNum = finalOptions.indexOf(correctIndex);
     buttonValue === questionList[questionNum].correct_answer
-      ? setIsCorrect(true)
-      : setIsCorrect(false);
+      ? setCorrectAnserIndex(correctIndexNum)
+      : setCorrectAnserIndex(-1);
   };
 
-  const click =
+  const clicked =
     "bg-sky-600 w-[20rem] ml-[4rem] md:w-[18rem] h-[4rem] rounded-md";
   const correct =
     "bg-lime-500 w-[20rem] ml-[4rem] md:w-[18rem] h-[4rem] rounded-md";
@@ -89,20 +98,21 @@ const QuizPage = () => {
             <p>{question}</p>
           </div>
           <div className="grid md:grid-cols-2 gap-y-2 md:gap-y-7 md:gap-x-0 py-5 px-5 md:px-0 ml-[0.5rem]">
-            {finalOptions.map((item) => (
+            {finalOptions.map((item, index) => (
               <button
                 key={item}
                 value={item}
                 className={
-                  selected && submitted && isCorrect
-                    ? correct
-                    : selected && submitted && !isCorrect
-                    ? wrong
-                    : selected
-                    ? click
+                  index === selectedButtonIndex && submitted
+                    ? correctAnserIndex === index
+                      ? correct
+                      : wrong
+                    : index === selectedButtonIndex
+                    ? clicked
                     : regular
                 }
-                onClick={handleSelect}
+                onClick={(event) => handleSelect(event, index)}
+                disabled={submitted && selected}
               >
                 {item}
               </button>
