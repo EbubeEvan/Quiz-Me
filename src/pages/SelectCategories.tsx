@@ -27,14 +27,11 @@ const SelectCategories = () => {
 
   console.log(params);
 
-// category options
+  // category options
   const categoryOption: ReactElement[] = categoryList.trivia_categories.map(
     (item) => {
       return (
-        <option
-          key={item.id}
-          value={item.id}
-        >
+        <option key={item.id} value={item.id}>
           {item.name}
         </option>
       );
@@ -50,18 +47,17 @@ const SelectCategories = () => {
       console.log(responseData);
 
       // Update Zustand store with the fetched data
-    useApiStore.getState().setQuestionList(responseData);
-
+      useApiStore.getState().setQuestionList(responseData);
     } catch (error) {
       console.log(error);
     }
-    navigate("/quizpage")
+    navigate("/quizpage");
   };
 
-  const handleChange = (e : any) => {
-    const {name, value} = e.target
-    setParams({...params, [name] : value})
-  }
+  const handleChange = (e: any) => {
+    const { name, value } = e.target;
+    setParams({ ...params, [name]: value });
+  };
 
   return (
     <main
@@ -77,15 +73,21 @@ const SelectCategories = () => {
       {/* Categories */}
       <div className="pt-10 px-8 max-w-[50rem] w-full mx-auto md:relative h-">
         <div className="grid md:grid-cols-2 gap-4 md:gap-y-7 gap-x-[4rem] mx-auto max-w-max">
+          <label className="flex justify-center ml-[-1rem] text-red-950 text-xl">
+            Category
+          </label>
           <select
             name="category"
             className="md:mx-auto bg-orange-700 -500 text-white w-[13rem] py-2 px-2 rounded-md md:w-[15rem] cursor-pointer"
             onChange={handleChange}
-            required 
+            required
           >
-            <option value="">Category</option>
+            <option value=""></option>
             {categoryOption}
           </select>
+          <label className="flex justify-center ml-[-1rem] text-red-950 text-xl">
+            Difficulty
+          </label>
           <select
             name="difficulty"
             id="difficulty"
@@ -93,23 +95,14 @@ const SelectCategories = () => {
             onChange={handleChange}
             required
           >
-            <option value="">Difficuly</option>
-            <option
-              value="easy"
-            >
-              Easy
-            </option>
-            <option
-              value="medium"
-            >
-              Medium
-            </option>
-            <option
-              value="hard"
-            >
-              Hard
-            </option>
+            <option value=""></option>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
           </select>
+          <label className="flex justify-center ml-[-1rem] text-red-950 text-xl">
+            Quiz Type
+          </label>
           <select
             name="type"
             id="Type"
@@ -117,13 +110,12 @@ const SelectCategories = () => {
             onChange={handleChange}
             required
           >
-            <option value="">Quiz Type</option>
-            <option
-              value="multiple"
-            >
-              Multiple Choice
-            </option>
+            <option value=""></option>
+            <option value="multiple">Multiple Choice</option>
           </select>
+          <label className="flex justify-center ml-[-1rem] text-red-950 text-xl">
+            Number
+          </label>
           <select
             name="number"
             id="number"
@@ -131,64 +123,37 @@ const SelectCategories = () => {
             onChange={handleChange}
             required
           >
-            <option value="">Number</option>
-            <option
-              value="10"
-            >
-              10
-            </option>
-            <option
-              value="15"
-            
-            >
-              15
-            </option>
-            <option
-              value="20"
-            >
-              20
-            </option>
+            <option value=""></option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
           </select>
+          <label className="flex justify-center ml-[-1rem] text-red-950 text-xl">
+            Timer
+          </label>
           <select
             name="timer"
             id="timer"
             className="md:mx-auto bg-orange-700 -500 text-white w-[13rem] py-2 px-2 rounded-md md:w-[15rem] cursor-pointer"
             onChange={handleChange}
           >
-            <option value="">Timer</option>
-            <option
-              value="false"
-            >
-              Off
-            </option>
-            <option
-              value="true"
-            >
-              On
-            </option>
+            <option value=""></option>
+            <option value="false">Off</option>
+            <option value="true">On</option>
           </select>
+          <label className="flex justify-center ml-[-1rem] text-red-950 text-xl">
+            Minutes
+          </label>
           <select
             name="minutes"
             id="minutes"
             className="md:mx-auto bg-orange-700 -500 text-white w-[13rem] py-2 px-2 rounded-md md:w-[15rem] cursor-pointer"
             onChange={handleChange}
           >
-            <option value="">Minutes</option>
-            <option
-              value="0"
-            >
-              5
-            </option>
-            <option
-              value="15"
-            >
-              10
-            </option>
-            <option
-              value="10"
-            >
-              15
-            </option>
+            <option value=""></option>
+            <option value="0">5</option>
+            <option value="15">10</option>
+            <option value="10">15</option>
           </select>
         </div>
         {/* Buttons */}
@@ -196,7 +161,12 @@ const SelectCategories = () => {
           <button
             className=" bg-red-600 text-white py-4 px-10 rounded-md h-fit "
             onClick={fetchQuestions}
-            disabled={!params.category && !params.difficulty && !params.minutes && !params.number}
+            disabled={
+              !params.category &&
+              !params.difficulty &&
+              !params.minutes &&
+              !params.number
+            }
           >
             Start
           </button>
