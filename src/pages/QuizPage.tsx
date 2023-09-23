@@ -131,7 +131,7 @@ const QuizPage = () => {
                     : regular
                 }
                 onClick={(event) => handleSelect(event, index)}
-                disabled={submitted}
+                disabled={submitted && selected}
               >
                 {decode(item)}
               </button>
@@ -157,7 +157,7 @@ const QuizPage = () => {
               className="bg-sky-600 ext-white py-1 px-2 md:py-2 md:px-4 rounded-md relative left-[2rem] md:left-[1rem] top-[-0.5rem]"
               onClick={submit}
             >
-              Submit
+              Check
             </button>
             <button
               className="bg-green-500 ext-white py-1 px-2 md:py-2 md:px-4 rounded-md relative left-[-1rem] md:left-[2.5rem] top-[-0.5rem]"
