@@ -1,4 +1,5 @@
 import { useApiStore } from "../store/questions";
+// import useCountDown from "../hooks/useCountDown";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { decode } from "html-entities";
@@ -12,12 +13,24 @@ const QuizPage = () => {
   const [finalOptions, setFinalOptions] = useState<string[]>([]);
   const [selected, setselected] = useState(false);
   const [correction, setCorrection] = useState(false);
-  const [questionCount, setQuestionCount] = useState(0)
-  const [countScore, setCountScore] = useState(0)
+  const [questionCount, setQuestionCount] = useState(0);
+  const [countScore, setCountScore] = useState(0);
+  // const [timer, setTimer] = useState<any>(0);
 
   const navigate = useNavigate();
 
   const { questionList } = useApiStore();
+  // const { time } = useApiStore();
+
+  // const newTime: any = useApiStore.getState().setTime(time! * 60000);
+
+  // const timeout = () => navigate("/score");
+
+  // const startTimer = useCountDown(newTime, timeout)
+
+  // if (time) {
+  //   setTimer(startTimer)
+  // }
 
   const question = questionList[questionNum].question;
 
@@ -51,8 +64,8 @@ const QuizPage = () => {
   const next = () => {
     reset();
     if (questionNum === questionList.length - 1) {
-      useApiStore.getState().setScore(countScore)
-      navigate("/score")
+      useApiStore.getState().setScore(countScore);
+      navigate("/score");
     } else {
       setQuestionNum(questionNum + 1);
     }
@@ -80,15 +93,15 @@ const QuizPage = () => {
       return;
     } else if (buttonValue === questionList[questionNum].correct_answer) {
       setIsCorrect(true);
-      setCountScore(countScore + 1)
+      setCountScore(countScore + 1);
     } else {
       setIsCorrect(false);
       setCorrection(true);
     }
-    setQuestionCount(questionCount + 1)
+    setQuestionCount(questionCount + 1);
   };
 
-  const totalQuestions = questionList.length
+  const totalQuestions = questionList.length;
 
   const clicked =
     "bg-sky-600 w-[20rem] ml-[4rem] md:w-[18rem] h-[4rem] rounded-md text-slate-50";
@@ -108,8 +121,19 @@ const QuizPage = () => {
       }}
     >
       <div className="flex justify-between">
-        <p className="text-red-950 ml-5 mt-5 md:ml-[10rem] md:mt-6 text-2xl">{questionList[questionNum].category}</p>
-        <p className="text-red-950 text-2xl mr-5 mt-5 md:mr-[10rem] md:mt-6">{questionCount} / {totalQuestions}</p>
+        <p className="text-red-950 ml-5 mt-5 md:ml-[10rem] md:mt-6 text-2xl">
+          {questionList[questionNum].category}
+        </p>
+        {/* {
+          timer 
+          ? (
+            <p>{timer}</p>
+          )
+          : ''
+        } */}
+        <p className="text-red-950 text-2xl mr-5 mt-5 md:mr-[10rem] md:mt-6">
+          {questionCount} / {totalQuestions}
+        </p>
       </div>
       <div className="flex justify-center relative left-[-2.2rem] pb-10 md:pb-0 pt-10 flex-shrink-0 px-3 flex-1 ">
         <div>
@@ -138,7 +162,7 @@ const QuizPage = () => {
             ))}
           </div>
           {correction ? (
-            <div className="flex justify-center ml-16 md:mt-5">
+            <div className="flex justify-center ml-16 md:mt-5 mb-[-1rem]">
               <p className="text-red-950 text-lg">
                 Answer : <span>{questionList[questionNum].correct_answer}</span>
               </p>

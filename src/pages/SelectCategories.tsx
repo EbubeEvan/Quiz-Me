@@ -25,6 +25,8 @@ const SelectCategories = () => {
     minutes: null,
   });
 
+  const [loading, setloading] = useState(false);
+
   console.log(params);
 
   // category options
@@ -39,15 +41,15 @@ const SelectCategories = () => {
   );
 
   const fetchQuestions = async () => {
+    setloading(true);
     try {
       const response = await axios.get(
         `https://opentdb.com/api.php?amount=${params.number}&category=${params.category}&difficulty=${params.difficulty}&type=${params.type}`
       );
       const responseData = response.data.results;
-      console.log(responseData);
-
       // Update Zustand store with the fetched data
       useApiStore.getState().setQuestionList(responseData);
+      if (params.minutes) useApiStore.getState().setTime(params.minutes);
     } catch (error) {
       console.log(error);
     }
@@ -59,17 +61,20 @@ const SelectCategories = () => {
     setParams({ ...params, [name]: value });
   };
 
+  const fetching =
+    "  bg-gray-700 text-white py-4 px-10 rounded-md h-fit mt-[-1rem]";
+  const notFetching =
+    " bg-red-600 text-white py-4 px-10 rounded-md h-fit mt-[-1rem]";
+
   return (
     <main
-      className="w-screen h-screen bg-cover bg-no-repeat bg-right  py-5 overflow-y-auto flex flex-col justify-center align-center"
+      className="w-screen h-screen bg-cover bg-no-repeat bg-right pt-[15rem] md:pt-[2rem] pb-5 overflow-y-auto flex flex-col justify-center align-center"
       style={{
         backgroundImage:
           "url(https://images.unsplash.com/photo-1633613286848-e6f43bbafb8d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80)",
       }}
     >
-      <h1 className="text-6xl md:text-9xl text-center text-red-950 font-serif">
-        Quiz Me
-      </h1>
+      <h1 className="text-7xl text-center text-red-950 font-serif mt-[-8rem] md:mt-[-5rem]">Quiz Me</h1>
       {/* Categories */}
       <div className="pt-10 px-8 max-w-[50rem] w-full mx-auto md:relative h-">
         <div className="grid md:grid-cols-2 gap-4 md:gap-y-7 gap-x-[4rem] mx-auto max-w-max">
@@ -128,10 +133,10 @@ const SelectCategories = () => {
             <option value="15">15</option>
             <option value="20">20</option>
           </select>
-          <label className="flex justify-center ml-[-1rem] text-red-950 text-xl">
+         {/* <label className="flex justify-center ml-[-1rem] text-red-950 text-xl">
             Timer
           </label>
-          <select
+           <select
             name="timer"
             id="timer"
             className="md:mx-auto bg-orange-700 -500 text-white w-[13rem] py-2 px-2 rounded-md md:w-[15rem] cursor-pointer"
@@ -151,15 +156,15 @@ const SelectCategories = () => {
             onChange={handleChange}
           >
             <option value=""></option>
-            <option value="0">5</option>
-            <option value="15">10</option>
-            <option value="10">15</option>
-          </select>
+            <option value="0">2</option>
+            <option value="15">5</option>
+            <option value="10">10</option>
+          </select> */}
         </div>
         {/* Buttons */}
         <div className="pt-12 max-w-[30rem] w-full mx-auto flex justify-center">
           <button
-            className=" bg-red-600 text-white py-4 px-10 rounded-md h-fit "
+            className={loading ? fetching : notFetching}
             onClick={fetchQuestions}
             disabled={
               !params.category &&
