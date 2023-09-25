@@ -17,20 +17,12 @@
             "name": "Entertainment: Music"
         },
         {
-            "id": 13,
-            "name": "Entertainment: Musicals & Theatres"
-        },
-        {
             "id": 14,
             "name": "Entertainment: Television"
         },
         {
             "id": 15,
             "name": "Entertainment: Video Games"
-        },
-        {
-            "id": 16,
-            "name": "Entertainment: Board Games"
         },
         {
             "id": 17,
@@ -65,16 +57,8 @@
             "name": "Politics"
         },
         {
-            "id": 25,
-            "name": "Art"
-        },
-        {
             "id": 26,
             "name": "Celebrities"
-        },
-        {
-            "id": 27,
-            "name": "Animals"
         },
         {
             "id": 28,

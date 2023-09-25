@@ -7,9 +7,9 @@ const Home = () => {
       <h1 className=" pt-4 text-8xl md:text-9xl text-center text-red-950 font-serif">
         Quiz Me
       </h1>
-      <div className=" h-[100vh] flex justify-center items-center md:h-[100vh] ">
+      <div className="flex justify-center items-center md:h-[100vh] h-[80vh] mb-[-20rem]">
       <Link to={'selectcategories'}>
-            <button className=" bg-red-600 text-white py-4 px-10 rounded-md h-fit">
+            <button className="bg-red-600 text-white py-4 px-10 rounded-md h-fit">
               Start
             </button>
           </Link>

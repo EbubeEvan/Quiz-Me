@@ -47,6 +47,8 @@ const SelectCategories = () => {
         `https://opentdb.com/api.php?amount=${params.number}&category=${params.category}&difficulty=${params.difficulty}&type=${params.type}`
       );
       const responseData = response.data.results;
+      console.log(responseData);
+      
       // Update Zustand store with the fetched data
       useApiStore.getState().setQuestionList(responseData);
       if (params.minutes) useApiStore.getState().setTime(params.minutes);

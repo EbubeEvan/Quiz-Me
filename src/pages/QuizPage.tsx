@@ -32,7 +32,7 @@ const QuizPage = () => {
   //   setTimer(startTimer)
   // }
 
-  const question = questionList[questionNum].question;
+  const question = questionList[questionNum]?.question;
 
   // Fisher-Yates shuffle algorithm
   const shuffleOptions = (arr: []) => {
