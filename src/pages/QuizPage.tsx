@@ -104,13 +104,13 @@ const QuizPage = () => {
   const totalQuestions = questionList.length;
 
   const clicked =
-    "bg-sky-600 w-[20rem] ml-[4rem] md:w-[18rem] h-[4rem] rounded-md text-slate-50";
+    "bg-sky-600 w-[20rem] ml-[4rem] md:w-[18rem] h-[4rem] rounded-md text-slate-50 py-[1rem]";
   const correct =
-    "bg-lime-500 w-[20rem] ml-[4rem] md:w-[18rem] h-[4rem] rounded-md text-slate-50";
+    "bg-lime-500 w-[20rem] ml-[4rem] md:w-[18rem] h-[4rem] rounded-md text-slate-50 py-[1rem]";
   const wrong =
-    "bg-red-700 w-[20rem] ml-[4rem] md:w-[18rem] h-[4rem] rounded-md text-slate-50";
+    "bg-red-700 w-[20rem] ml-[4rem] md:w-[18rem] h-[4rem] rounded-md text-slate-50 py-[1rem]";
   const regular =
-    "bg-red-500  w-[20rem] ml-[4rem] md:w-[18rem] h-[4rem] rounded-md text-slate-50";
+    "bg-red-500  w-[20rem] ml-[4rem] md:w-[18rem] h-[4rem] rounded-md text-slate-50 py-[1rem]";
 
   return (
     <main
@@ -121,7 +121,7 @@ const QuizPage = () => {
       }}
     >
       <div className="flex justify-between">
-        <p className="text-red-950 ml-5 mt-5 md:ml-[10rem] md:mt-6 text-2xl">
+        <p className="text-red-950 ml-5 mt-5 md:ml-[10rem] md:mt-6 text-2xl px-[1rem] py-[1rem]">
           {questionList[questionNum].category}
         </p>
         {/* {
@@ -164,7 +164,7 @@ const QuizPage = () => {
           {correction ? (
             <div className="flex justify-center ml-16 md:mt-5 mb-[-1rem]">
               <p className="text-red-950 text-lg">
-                Answer : <span>{questionList[questionNum].correct_answer}</span>
+                Answer : <span>{decode(questionList[questionNum].correct_answer)}</span>
               </p>
             </div>
           ) : (

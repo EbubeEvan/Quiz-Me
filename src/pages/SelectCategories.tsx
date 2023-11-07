@@ -76,25 +76,19 @@ const SelectCategories = () => {
           "url(https://images.unsplash.com/photo-1633613286848-e6f43bbafb8d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80)",
       }}
     >
-      <h1 className="text-7xl text-center text-red-950 font-serif mt-[-8rem] md:mt-[-5rem]">Quiz Me</h1>
+      <h1 className="text-7xl md:text-8xl text-center text-red-950 font-serif mt-[-8rem] md:mt-[-5rem]">SELECT</h1>
       {/* Categories */}
-      <div className="pt-10 px-8 max-w-[50rem] w-full mx-auto md:relative h-">
-        <div className="grid md:grid-cols-2 gap-4 md:gap-y-7 gap-x-[4rem] mx-auto max-w-max">
-          <label className="flex justify-center ml-[-1rem] text-red-950 text-xl">
-            Category
-          </label>
+      <div className="pt-10 px-8 max-w-[50rem] w-full mx-auto md:relative md:mt-[5rem]">
+        <div className="grid md:grid-cols-2 gap-4 md:gap-y-7 gap-x-[4rem] mx-auto my-8 md:mt-[-1rem] max-w-max">
           <select
             name="category"
             className="md:mx-auto bg-orange-700 -500 text-white w-[13rem] py-2 px-2 rounded-md md:w-[15rem] cursor-pointer"
             onChange={handleChange}
             required
           >
-            <option value=""></option>
+            <option value="">Category</option>
             {categoryOption}
           </select>
-          <label className="flex justify-center ml-[-1rem] text-red-950 text-xl">
-            Difficulty
-          </label>
           <select
             name="difficulty"
             id="difficulty"
@@ -102,14 +96,11 @@ const SelectCategories = () => {
             onChange={handleChange}
             required
           >
-            <option value=""></option>
+            <option value="">Difficulty</option>
             <option value="easy">Easy</option>
             <option value="medium">Medium</option>
             <option value="hard">Hard</option>
           </select>
-          <label className="flex justify-center ml-[-1rem] text-red-950 text-xl">
-            Quiz Type
-          </label>
           <select
             name="type"
             id="Type"
@@ -117,12 +108,9 @@ const SelectCategories = () => {
             onChange={handleChange}
             required
           >
-            <option value=""></option>
+            <option value="">Quiz Type</option>
             <option value="multiple">Multiple Choice</option>
           </select>
-          <label className="flex justify-center ml-[-1rem] text-red-950 text-xl">
-            Number
-          </label>
           <select
             name="number"
             id="number"
@@ -130,7 +118,7 @@ const SelectCategories = () => {
             onChange={handleChange}
             required
           >
-            <option value=""></option>
+            <option value="">Number</option>
             <option value="10">10</option>
             <option value="15">15</option>
             <option value="20">20</option>
