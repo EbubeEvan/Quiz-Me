@@ -135,7 +135,7 @@ const QuizPage = () => {
           {questionCount} / {totalQuestions}
         </p>
       </div>
-      <div className="flex justify-center relative left-[-2.2rem] pb-10 md:pb-0 pt-10 flex-shrink-0 px-3 flex-1 ">
+      <div className="flex justify-center h-full relative left-[-2.2rem] pb-10 md:pb-0 pt-10 flex-shrink-0 px-3 flex-1 ">
         <div>
           <div className="bg-red-500 w-[21rem] md:w-[42rem] h-[8rem] md:h-[10rem] mt-8 relative left-[5.2rem] md:left-[3.5rem] rounded-md flex justify-center pt-9 md:pt-14">
             <p className="text-slate-50 text-center">{decode(question)}</p>
@@ -172,13 +172,7 @@ const QuizPage = () => {
           )}
           <div className="flex justify-between relative top-[2rem] md:top-[4rem]">
             <button
-              className="bg-emerald-300 ext-white py-1 px-2 md:py-2 md:px-4 rounded-md relative left-[5.5rem] md:left-[1rem] top-[-0.5rem]"
-              onClick={previous}
-            >
-              Previous
-            </button>
-            <button
-              className="bg-sky-600 ext-white py-1 px-2 md:py-2 md:px-4 rounded-md relative left-[2rem] md:left-[1rem] top-[-0.5rem]"
+              className="bg-sky-600 ext-white py-1 px-2 md:py-2 md:px-4 rounded-md relative left-[5rem] md:left-[1rem] top-[-0.5rem]"
               onClick={submit}
             >
               Check
