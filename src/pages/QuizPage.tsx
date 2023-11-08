@@ -71,12 +71,12 @@ const QuizPage = () => {
     }
   };
 
-  const previous = () => {
-    reset();
-    questionNum === 0
-      ? setQuestionNum(questionNum)
-      : setQuestionNum(questionNum - 1);
-  };
+  // const previous = () => {
+  //   reset();
+  //   questionNum === 0
+  //     ? setQuestionNum(questionNum)
+  //     : setQuestionNum(questionNum - 1);
+  // };
 
   const handleSelect = (
     event: React.MouseEvent<HTMLButtonElement>,
