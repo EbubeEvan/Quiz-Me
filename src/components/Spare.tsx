@@ -6,10 +6,13 @@ import { decode } from "html-entities";
 
 const QuizPage = () => {
   const [questionNum, setQuestionNum] = useState(0);
+  const [submitted, setSubmitted] = useState(false);
+  const [isCorrect, setIsCorrect] = useState(false);
   const [buttonValue, setButtonValue] = useState("");
   const [selectedButtonIndex, setSelectedButtonIndex] = useState(-1);
   const [finalOptions, setFinalOptions] = useState<string[]>([]);
   const [selected, setselected] = useState(false);
+  const [correction, setCorrection] = useState(false);
   const [questionCount, setQuestionCount] = useState(0);
   const [countScore, setCountScore] = useState(0);
   // const [timer, setTimer] = useState<any>(0);
@@ -51,24 +54,29 @@ const QuizPage = () => {
     // setCorrectAnswer(questionList[questionNum]?.incorrect_answers)
   }, [questionNum]);
 
-  const submit = () => {
-    if (buttonValue === questionList[questionNum].correct_answer) {
-      setCountScore(countScore + 1);
-    } 
-    setQuestionCount(questionCount + 1);
+  const reset = () => {
+    setIsCorrect(false);
+    setSubmitted(false);
+    setSelectedButtonIndex(-1);
+    setCorrection(false);
   };
 
   const next = () => {
-    submit();
-    setSelectedButtonIndex(-1);
+    reset();
     if (questionNum === questionList.length - 1) {
       useApiStore.getState().setScore(countScore);
-      useApiStore.getState().setCompleted(true);
       navigate("/score");
     } else {
       setQuestionNum(questionNum + 1);
     }
   };
+
+  // const previous = () => {
+  //   reset();
+  //   questionNum === 0
+  //     ? setQuestionNum(questionNum)
+  //     : setQuestionNum(questionNum - 1);
+  // };
 
   const handleSelect = (
     event: React.MouseEvent<HTMLButtonElement>,
@@ -79,10 +87,28 @@ const QuizPage = () => {
     setselected(true);
   };
 
+  const submit = () => {
+    setSubmitted(true);
+    if (selectedButtonIndex === -1) {
+      return;
+    } else if (buttonValue === questionList[questionNum].correct_answer) {
+      setIsCorrect(true);
+      setCountScore(countScore + 1);
+    } else {
+      setIsCorrect(false);
+      setCorrection(true);
+    }
+    setQuestionCount(questionCount + 1);
+  };
+
   const totalQuestions = questionList.length;
 
   const clicked =
     "bg-sky-600 w-[20rem] ml-[4rem] md:w-[18rem] h-[4rem] rounded-md text-slate-50 py-[1rem]";
+  const correct =
+    "bg-lime-500 w-[20rem] ml-[4rem] md:w-[18rem] h-[4rem] rounded-md text-slate-50 py-[1rem]";
+  const wrong =
+    "bg-red-700 w-[20rem] ml-[4rem] md:w-[18rem] h-[4rem] rounded-md text-slate-50 py-[1rem]";
   const regular =
     "bg-red-500  w-[20rem] ml-[4rem] md:w-[18rem] h-[4rem] rounded-md text-slate-50 py-[1rem]";
 
@@ -120,21 +146,40 @@ const QuizPage = () => {
                 key={item}
                 value={item}
                 className={
-                  index === selectedButtonIndex 
-                  ? clicked 
-                  : regular
+                  index === selectedButtonIndex && submitted
+                    ? isCorrect
+                      ? correct
+                      : wrong
+                    : index === selectedButtonIndex
+                    ? clicked
+                    : regular
                 }
                 onClick={(event) => handleSelect(event, index)}
+                disabled={submitted && selected}
               >
                 {decode(item)}
               </button>
             ))}
           </div>
-          <div className="flex justify-center mt-3 md:mt-9 ml-[4rem]">
+          {correction ? (
+            <div className="flex justify-center ml-16 md:mt-5 mb-[-1rem]">
+              <p className="text-red-950 text-lg">
+                Answer : <span>{decode(questionList[questionNum].correct_answer)}</span>
+              </p>
+            </div>
+          ) : (
+            ""
+          )}
+          <div className="flex justify-between relative top-[2rem] md:top-[4rem]">
             <button
-              className="bg-green-500 ext-white py-1 px-2 md:py-2 md:px-4 rounded-md"
+              className="bg-sky-600 ext-white py-1 px-2 md:py-2 md:px-4 rounded-md relative left-[5rem] md:left-[1rem] top-[-0.5rem]"
+              onClick={submit}
+            >
+              Check
+            </button>
+            <button
+              className="bg-green-500 ext-white py-1 px-2 md:py-2 md:px-4 rounded-md relative left-[-1rem] md:left-[2.5rem] top-[-0.5rem]"
               onClick={next}
-              disabled={!selected}
             >
               Next
             </button>
