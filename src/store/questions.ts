@@ -8,6 +8,8 @@ interface ApiStoreState {
   setScore: (data: any) => void;
   time: number | null;
   setTime: (data: any) => void;
+  completed: boolean;
+  setCompleted: (data: any) => void;
 }
 
 export const useApiStore = create<ApiStoreState>()(
@@ -18,7 +20,9 @@ export const useApiStore = create<ApiStoreState>()(
       score: 0,
       setScore: (data) => set({ score: data }),
       time: null,
-      setTime: (data) => set({ time: data })
+      setTime: (data) => set({ time: data }),
+      completed: false,
+      setCompleted: (data) => set({ completed: data })
     }),
     { name: "apiStore" }
   )

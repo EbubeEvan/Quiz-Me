@@ -2,7 +2,7 @@ import Home from "./pages/Home"
 import SelectCategories from "./pages/SelectCategories"
 import QuizPage from "./pages/QuizPage"
 import Score from "./pages/Score"
-import Corrections from "./pages/Corrections"
+import Answers from "./pages/Answers"
 import Layout from "./components/Layout"
 import { Route, Routes } from "react-router-dom"
 
@@ -15,7 +15,7 @@ const App = () => {
       <Route path="/" element={<Layout/>}>
         <Route path="quizpage" element={<QuizPage/>}/>
         <Route path="score" element={<Score/>}/>
-        <Route path="corrections" element={<Corrections/>}/>
+        <Route path="answers" element={<Answers/>}/>
       </Route>
     </Routes>
   )

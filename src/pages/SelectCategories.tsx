@@ -27,7 +27,7 @@ const SelectCategories = () => {
 
   const [loading, setloading] = useState(false);
 
-  console.log(params);
+  useApiStore.getState().setCompleted(false);
 
   // category options
   const categoryOption: ReactElement[] = categoryList.trivia_categories.map(
@@ -51,7 +51,7 @@ const SelectCategories = () => {
       
       // Update Zustand store with the fetched data
       useApiStore.getState().setQuestionList(responseData);
-      if (params.minutes) useApiStore.getState().setTime(params.minutes);
+      // if (params.minutes) useApiStore.getState().setTime(params.minutes);
     } catch (error) {
       console.log(error);
     }
