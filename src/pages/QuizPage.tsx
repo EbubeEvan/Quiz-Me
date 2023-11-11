@@ -132,7 +132,7 @@ const QuizPage = () => {
           </div>
           <div className="flex justify-center mt-3 md:mt-9 ml-[4rem]">
             <button
-              className="bg-green-500 ext-white py-1 px-2 md:py-2 md:px-4 rounded-md"
+              className="bg-green-500 ext-white py-4 px-10 rounded-md"
               onClick={next}
               disabled={!selected}
             >
