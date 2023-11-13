@@ -111,7 +111,7 @@ const QuizPage = () => {
       </div>
       <div className="flex justify-center h-full relative left-[-2.2rem] pb-10 md:pb-0 pt-10 flex-shrink-0 px-3 flex-1 ">
         <div>
-          <div className="bg-red-500 w-[21rem] md:w-[42rem] h-[8rem] md:h-[10rem] mt-8 relative left-[5.2rem] md:left-[3.5rem] rounded-md flex justify-center pt-9 md:pt-14">
+          <div className="bg-red-500 max-w-[22rem] md:max-w-[42rem] h-[8rem] md:h-[10rem] mt-8 ml-[4.7rem] md:ml-[4.5rem] rounded-md flex justify-center pt-9 md:pt-14">
             <p className="text-slate-50 text-center">{decode(question)}</p>
           </div>
           <div className="grid md:grid-cols-2 gap-y-2 md:gap-y-7 md:gap-x-0 py-5 px-5 md:px-0 ml-[0.5rem]">

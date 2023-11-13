@@ -20,7 +20,7 @@ const Answers = () => {
           <div className="grid gap-2">
           {
             questionList.map((item) => (
-              <article className="bg-orange-700 -500 rounded-md max-h-32 max-w-[22rem] md:max-w-[40rem] py-4 px-2">
+              <article className="bg-orange-700 -500 rounded-md max-w-[22rem] md:max-w-[40rem] py-4 px-2">
                 <p className="text-slate-50 text-center text-lg">Question : <span>{decode(item.question)}</span></p>
                 <p className="text-slate-50 text-center text-lg">Answer : <span>{decode(item.correct_answer)}</span></p>
               </article>
